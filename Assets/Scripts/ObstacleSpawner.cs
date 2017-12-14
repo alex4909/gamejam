@@ -84,8 +84,23 @@ public class ObstacleSpawner : MonoBehaviour {
 		forcefields = AddItemToArray (forcefields, target);
 		forcefields = forcefields.OrderBy(go => go.transform.position.y).ToArray();
 
+		for (int i = 0; i < forcefields.Length; i++) {
+			if(i < forcefields.Length-1){
+				//forcefields [i].AddComponent <SpringJoint2D>();
+				//forcefields [i].GetComponent<SpringJoint2D> ().connectedBody = forcefields [i + 1].GetComponent<Rigidbody2D>();
+				SpringJoint2D sjt=forcefields[i].gameObject.AddComponent<SpringJoint2D>();
 
-		print (forcefields[0].transform.position.y);
+				Rigidbody2D connectedRB = forcefields [i + 1].gameObject.GetComponent<Rigidbody2D> ();
+				sjt.connectedBody = connectedRB;
+				sjt.frequency = 10000f;
+				sjt.dampingRatio = 0.1f;
+			
+
+			}
+		}
+
+
+		//print (forcefields[0].transform.position.y);
 
 	}
 

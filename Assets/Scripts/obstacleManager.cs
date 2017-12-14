@@ -26,7 +26,7 @@ public class obstacleManager : MonoBehaviour {
 		//get down limit
 		downmost = Camera.main.ViewportToWorldPoint(new Vector3(0,0,distance));
 		screenHeight = upmost.y - downmost.y;
-		
+
 	}
 	
 	// Update is called once per frame
@@ -41,12 +41,12 @@ public class obstacleManager : MonoBehaviour {
 		forcefields = AddItemToArray (forcefields, target);
 		forcefields = forcefields.OrderBy(go => go.transform.position.y).ToArray();
 
-		float bottomY = downmost.y + (forcefields [0].transform.localScale.y / 2);
+		float bottomY = downmost.y + (forcefields[0].transform.localScale.y / 2);
 		float topY = upmost.y - (forcefields [forcefields.Length-1].transform.localScale.y / 2);
 
 		forcefields [0].transform.position = new Vector3 (forcefields [0].transform.position.x, bottomY, forcefields [0].transform.position.z);
 		forcefields [forcefields.Length-1].transform.position = new Vector3 (forcefields [forcefields.Length-1].transform.position.x, topY, forcefields [forcefields.Length-1].transform.position.z);
-		print (forcefields.Length);
+
 	}
 
 	private GameObject[] AddItemToArray (GameObject[] original, GameObject itemToAdd) {

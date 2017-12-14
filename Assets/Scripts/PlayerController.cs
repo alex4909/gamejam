@@ -59,21 +59,14 @@ public class PlayerController : MonoBehaviour {
 
 
 	//collisions
-	void OnTriggerEnter2D(Collider2D collider){
+	void OnCollisionEnter2D(Collision2D collider){
 
-		//ensure collisions with enemy laser only are registered
-		EnemyProjectile missile = collider.gameObject.GetComponent<EnemyProjectile> ();
-		if (missile) {
-			health -= missile.GetDamage();
-			missile.Hit();
-		}
 
-		if (health <= 0) {
 			AudioSource.PlayClipAtPoint (loseSound,transform.position);
 			LevelManager man = GameObject.Find ("LevelManager").GetComponent<LevelManager> ();
 			man.LoadLevel ("End Menu");
 			Destroy (gameObject);
-		}
+
 	}
 
 

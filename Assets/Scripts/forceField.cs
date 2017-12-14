@@ -25,7 +25,7 @@ public class forceField : MonoBehaviour {
 	}
 
 
-	void OnTriggerEnter2D(Collider2D collider){
+	void OnCollisionEnter2D(Collision2D collider){
 
 		//ensure collisions with player laser only are registered
 		Projectile missile = collider.gameObject.GetComponent<Projectile> ();
@@ -36,17 +36,30 @@ public class forceField : MonoBehaviour {
 
 			if (gameObject.tag == "target") {
 				gameObject.transform.localScale -= new Vector3 (changeSize,changeSize,changeSize);
+				CircleCollider2D col = gameObject.GetComponent<CircleCollider2D> ();
+				col.transform.localScale -= new Vector3 (changeSize,changeSize,changeSize);
+
 				GameObject[] forceFields = GameObject.FindGameObjectsWithTag ("forcefield");
 				foreach (GameObject forceField in forceFields) {
 					float rescaleSize = changeSize / forceFields.Length;
 					forceField.transform.localScale += new Vector3 (rescaleSize, rescaleSize, rescaleSize);
+					CircleCollider2D col1 = forceField.GetComponent<CircleCollider2D>();
+					col1.transform.localScale += new Vector3 (rescaleSize, rescaleSize, rescaleSize);
 					//TODO reposition here
 				}
 
 			} else if (gameObject.tag == "forcefield") {
 				gameObject.transform.localScale += new Vector3 (changeSize,changeSize,changeSize);
+				CircleCollider2D col = gameObject.GetComponent<CircleCollider2D> ();
+				col.transform.localScale += new Vector3 (changeSize,changeSize,changeSize);
+
+				GameObject[] forceFields = GameObject.FindGameObjectsWithTag ("forcefield");
+				float rescaleSize = changeSize / forceFields.Length;
 				GameObject target = GameObject.FindGameObjectWithTag ("target");
 				target.transform.localScale -= new Vector3 (changeSize,changeSize,changeSize);
+				CircleCollider2D col2 = target.GetComponent<CircleCollider2D>();
+				col2.transform.localScale -= new Vector3 (rescaleSize, rescaleSize, rescaleSize);
+
 			}
 		}
 
