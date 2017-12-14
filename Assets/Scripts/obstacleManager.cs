@@ -40,6 +40,7 @@ public class obstacleManager : MonoBehaviour {
 		GameObject[] forcefields = GameObject.FindGameObjectsWithTag ("forcefield");
 		GameObject target = GameObject.FindGameObjectWithTag ("target");
 		forcefields = AddItemToArray (forcefields, target);
+		if(forcefields.Length > 0){
 		forcefields = forcefields.OrderBy(go => go.transform.position.y).ToArray();
 
 		float bottomY = downmost.y + (forcefields[0].transform.localScale.y / 2);
@@ -47,7 +48,7 @@ public class obstacleManager : MonoBehaviour {
 
 		forcefields [0].transform.position = new Vector3 (forcefields [0].transform.position.x, bottomY, forcefields [0].transform.position.z);
 		//forcefields [forcefields.Length-1].transform.position = new Vector3 (forcefields [forcefields.Length-1].transform.position.x, topY, forcefields [forcefields.Length-1].transform.position.z);
-
+		}
 	}
 
 	private GameObject[] AddItemToArray (GameObject[] original, GameObject itemToAdd) {

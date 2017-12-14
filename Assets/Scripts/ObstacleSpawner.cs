@@ -12,7 +12,7 @@ public class ObstacleSpawner : MonoBehaviour {
 	float distance;
 	public int maxObstacles=6;
 	public int minObstacles=3;
-	public float defaultx = 12f;
+	public float defaultxSpawn = 12f;
 	public float speed = 5f;
 	public Sprite targetSprite;
 
@@ -36,8 +36,8 @@ public class ObstacleSpawner : MonoBehaviour {
 		GameObject[] currentForcefields= GameObject.FindGameObjectsWithTag ("forcefield");
 		if (currentForcefields.Length == 0) {
 			int numberOfObstacles = Random.Range (minObstacles, maxObstacles);
-			SpawnFixedObstacles (numberOfObstacles, screenHeight, defaultx, downmost.y, upmost.y);
-			SpawnObstacles (numberOfObstacles, screenHeight, defaultx, downmost.y, upmost.y);
+			SpawnFixedObstacles (numberOfObstacles, screenHeight, defaultxSpawn, downmost.y, upmost.y);
+			SpawnObstacles (numberOfObstacles, screenHeight, defaultxSpawn, downmost.y, upmost.y);
 			AssignTarget ();
 			//AddJoints ();
 		}

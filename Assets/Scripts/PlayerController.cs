@@ -6,7 +6,7 @@ public class PlayerController : MonoBehaviour {
 
 	//ship speed
 	public float speed = 15f;
-	public float padding = 0f;
+	private float padding = 0f;
 	public float projectileSpeed=10f;
 	public float fireRate=0.2f;
 	public float health = 500;
@@ -19,20 +19,30 @@ public class PlayerController : MonoBehaviour {
 	//x limits
 	float ymin;
 	float ymax;
+	float xmax;
+	float xmin;
 
 	// Use this for initialization
 	void Start () {
 		//get z distance from camera to player
 		float distance = transform.position.z - Camera.main.transform.position.z;
 
-		//get left limit by calculating in worldpoints from camera view
+		//get up limit by calculating in worldpoints from camera view
 		Vector3 upmost = Camera.main.ViewportToWorldPoint(new Vector3(0,1,distance));
 
-		//get right limit
+		//get down limit
 		Vector3 downmost = Camera.main.ViewportToWorldPoint(new Vector3(0,0,distance));
+
+		//get left limit
+		Vector3 leftmost = Camera.main.ViewportToWorldPoint(new Vector3(0,0,distance));
+
+		//get right
+		Vector3 rightmost = Camera.main.ViewportToWorldPoint(new Vector3(1,0,distance));
 	
 		ymax = upmost.y-padding;
 		ymin = downmost.y+padding;
+		xmax = rightmost.x;
+		xmin = leftmost.x;
 
 
 		//spawn thruster particle stream
@@ -59,7 +69,7 @@ public class PlayerController : MonoBehaviour {
 
 
 	//collisions
-	void OnCollisionEnter2D(Collision2D collider){
+	void OnTriggerEnter2D(Collider2D collider){
 
 
 			AudioSource.PlayClipAtPoint (loseSound,transform.position);
@@ -85,10 +95,19 @@ public class PlayerController : MonoBehaviour {
 		else if (Input.GetKey (KeyCode.DownArrow)) {
 			transform.position -= Vector3.up*speed*Time.deltaTime;
 		}
+
+		else if (Input.GetKey (KeyCode.LeftArrow)) {
+			transform.position -= Vector3.right*speed*Time.deltaTime;
+		}
+
+		else if (Input.GetKey (KeyCode.RightArrow)) {
+			transform.position += Vector3.right*speed*Time.deltaTime;
+		}
 			
 		//restrict player to gamespace
+		float newx =Mathf.Clamp (transform.position.x, xmin, xmax);
 		float newY = Mathf.Clamp (transform.position.y, ymin, ymax);
-		transform.position = new Vector3 (transform.position.x, newY, transform.position.z);
+		transform.position = new Vector3 (newx, newY, transform.position.z);
 	}
 
 

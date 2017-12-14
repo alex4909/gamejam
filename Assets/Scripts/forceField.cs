@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class forceField : MonoBehaviour {
 
-	public float health = 150;
+	public int maxhealth = 7;
+	public int minhealth = 3;
+	private int health;
 	public GameObject projectile;
 	public float enemyProjectileSpeed = 10f;
 	public float laserRate = 0.0005f;
@@ -12,13 +14,13 @@ public class forceField : MonoBehaviour {
 	public int enemyScore = 150;
 	public AudioClip fireSound;
 	public AudioClip destroyedSound;
-	public float pushDistance = 0.2f;
+	public float pushDistance = 0.8f;
 
 	private ScoreKeeper scoreKeeper;
 
 
 	void Start(){
-
+		health = Random.Range (minhealth, maxhealth);
 	}
 
 	void Update(){
@@ -27,6 +29,8 @@ public class forceField : MonoBehaviour {
 
 
 	void OnTriggerEnter2D(Collider2D collider){
+
+		health -= 1;
 
 		//ensure collisions with player laser only are registered
 		Projectile missile = collider.gameObject.GetComponent<Projectile> ();
@@ -37,6 +41,8 @@ public class forceField : MonoBehaviour {
 			transform.position += Vector3.right * pushDistance;
 
 			if (gameObject.tag == "target") {
+
+				//resize everything
 				gameObject.transform.localScale -= new Vector3 (changeSize,changeSize,changeSize);
 				CircleCollider2D col = gameObject.GetComponent<CircleCollider2D> ();
 				col.transform.localScale -= new Vector3 (changeSize,changeSize,changeSize);
@@ -47,10 +53,17 @@ public class forceField : MonoBehaviour {
 					forceField.transform.localScale += new Vector3 (rescaleSize, rescaleSize, rescaleSize);
 					CircleCollider2D col1 = forceField.GetComponent<CircleCollider2D>();
 					col1.transform.localScale += new Vector3 (rescaleSize, rescaleSize, rescaleSize);
-					//TODO reposition here
+
+					//destroy if out of health
+					if (health <= 0) {
+						Destroy (gameObject);
+					}
+
 				}
 
 			} else if (gameObject.tag == "forcefield") {
+
+				//resize everything
 				gameObject.transform.localScale += new Vector3 (changeSize,changeSize,changeSize);
 				CircleCollider2D col = gameObject.GetComponent<CircleCollider2D> ();
 				col.transform.localScale += new Vector3 (changeSize,changeSize,changeSize);
@@ -62,16 +75,11 @@ public class forceField : MonoBehaviour {
 				CircleCollider2D col2 = target.GetComponent<CircleCollider2D>();
 				col2.transform.localScale -= new Vector3 (changeSize,changeSize,changeSize);
 
+
 			}
 		}
 
-		/*
-		if (health <= 0) {
-			AudioSource.PlayClipAtPoint (destroyedSound,transform.position);
-			Destroy (gameObject);
-			//update thescore if an enemy is destroyed
-			scoreKeeper.Score (enemyScore);
-		}*/
+
 	}
 
 
