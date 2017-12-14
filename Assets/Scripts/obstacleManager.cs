@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
+
 //script to manage the position of the obstacles
 
 
@@ -30,15 +31,30 @@ public class obstacleManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		obstacles = (GameObject.FindGameObjectsWithTag("forcefield")).ToList();
-		target = GameObject.FindGameObjectWithTag("target");
-		obstacles.Add (target);///
-		obstacles = obstacles.OrderBy (go => go.transform.position.y.ToArray ());
-		for (int i =0 ;i < obstacles.Count;i ++) {
+		Anchor ();
+	}
 
-			if (i == 0) {
-				obstacles [i].transform.position.y = downmost + obstacles [i].transform.localScale.y;
-			}
+	//anchor top and bottom forcefields
+	void Anchor(){
+		GameObject[] forcefields = GameObject.FindGameObjectsWithTag ("forcefield");
+		GameObject target = GameObject.FindGameObjectWithTag ("target");
+		forcefields = AddItemToArray (forcefields, target);
+		forcefields = forcefields.OrderBy(go => go.transform.position.y).ToArray();
+
+		float bottomY = downmost.y + (forcefields [0].transform.localScale.y / 2);
+		float topY = upmost.y - (forcefields [forcefields.Length-1].transform.localScale.y / 2);
+
+		forcefields [0].transform.position = new Vector3 (forcefields [0].transform.position.x, bottomY, forcefields [0].transform.position.z);
+		forcefields [forcefields.Length-1].transform.position = new Vector3 (forcefields [forcefields.Length-1].transform.position.x, topY, forcefields [forcefields.Length-1].transform.position.z);
+		print (forcefields.Length);
+	}
+
+	private GameObject[] AddItemToArray (GameObject[] original, GameObject itemToAdd) {
+		GameObject[] finalArray = new GameObject[ original.Length + 1 ];
+		for(int i = 0; i<original.Length; i ++ ) {
+			finalArray[i] = original[i];
 		}
+		finalArray[finalArray.Length - 1] = itemToAdd;
+		return finalArray;
 	}
 }

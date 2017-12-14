@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class ObstacleSpawner : MonoBehaviour {
 
@@ -9,6 +10,8 @@ public class ObstacleSpawner : MonoBehaviour {
 	Vector3 downmost;
 	Vector3 upmost; 
 	float distance;
+	public int maxObstacles=6;
+	public int minObstacles=3;
 	public float defaultx = 12f;
 	public float speed = 5f;
 	public Sprite targetSprite;
@@ -32,10 +35,11 @@ public class ObstacleSpawner : MonoBehaviour {
 
 		GameObject[] currentForcefields= GameObject.FindGameObjectsWithTag ("forcefield");
 		if (currentForcefields.Length == 0) {
-			
-			SpawnFixedObstacles (5f, screenHeight, defaultx, downmost.y, upmost.y);
-			SpawnObstacles (5f, screenHeight, defaultx, downmost.y, upmost.y);
+			int numberOfObstacles = Random.Range (minObstacles, maxObstacles);
+			SpawnFixedObstacles (numberOfObstacles, screenHeight, defaultx, downmost.y, upmost.y);
+			SpawnObstacles (numberOfObstacles, screenHeight, defaultx, downmost.y, upmost.y);
 			AssignTarget ();
+			AddJoints ();
 		}
 	}
 
@@ -72,4 +76,28 @@ public class ObstacleSpawner : MonoBehaviour {
 		SpriteRenderer sr = forcefields [targetIndex].GetComponent<SpriteRenderer> ();
 		sr.sprite = targetSprite;
 	}
+
+	void AddJoints(){
+		
+		GameObject[] forcefields = GameObject.FindGameObjectsWithTag ("forcefield");
+		GameObject target = GameObject.FindGameObjectWithTag ("target");
+		forcefields = AddItemToArray (forcefields, target);
+		forcefields = forcefields.OrderBy(go => go.transform.position.y).ToArray();
+
+
+		print (forcefields[0].transform.position.y);
+
+	}
+
+	private GameObject[] AddItemToArray (GameObject[] original, GameObject itemToAdd) {
+		GameObject[] finalArray = new GameObject[ original.Length + 1 ];
+		for(int i = 0; i<original.Length; i ++ ) {
+			finalArray[i] = original[i];
+		}
+		finalArray[finalArray.Length - 1] = itemToAdd;
+		return finalArray;
+	}
+
+
+
 }
