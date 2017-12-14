@@ -16,6 +16,9 @@ public class ObstacleSpawner : MonoBehaviour {
 	public float speed = 5f;
 	//TODO make speed vary with time
 	public Sprite targetSprite;
+	public GameObject Asteroid;
+	public float minspin=0.5f;
+	public float maxspin=2f;
 
 	// Use this for initialization
 	void Start () {
@@ -40,6 +43,7 @@ public class ObstacleSpawner : MonoBehaviour {
 			SpawnFixedObstacles (numberOfObstacles, screenHeight, defaultxSpawn, downmost.y, upmost.y);
 			SpawnObstacles (numberOfObstacles, screenHeight, defaultxSpawn, downmost.y, upmost.y);
 			AssignTarget ();
+			SpawnAsteroids ();
 			speed += 0.2f;
 		}
 	}
@@ -78,32 +82,20 @@ public class ObstacleSpawner : MonoBehaviour {
 		sr.sprite = targetSprite;
 	}
 
-	/*void AddJoints(){
-		
+
+	void SpawnAsteroids(){
 		GameObject[] forcefields = GameObject.FindGameObjectsWithTag ("forcefield");
 		GameObject target = GameObject.FindGameObjectWithTag ("target");
 		forcefields = AddItemToArray (forcefields, target);
-		forcefields = forcefields.OrderBy(go => go.transform.position.y).ToArray();
 
-		for (int i = 0; i < forcefields.Length; i++) {
-			if(i < forcefields.Length-1){
-				//forcefields [i].AddComponent <SpringJoint2D>();
-				//forcefields [i].GetComponent<SpringJoint2D> ().connectedBody = forcefields [i + 1].GetComponent<Rigidbody2D>();
-				SpringJoint2D sjt=forcefields[i].gameObject.AddComponent<SpringJoint2D>();
-
-				Rigidbody2D connectedRB = forcefields [i + 1].gameObject.GetComponent<Rigidbody2D> ();
-				sjt.connectedBody = connectedRB;
-				sjt.frequency = 0f;
-				sjt.dampingRatio = 0.1f;
-			
-
-			}
+		foreach (GameObject forcefield in forcefields) {
+			var asteroid = Instantiate (Asteroid, new Vector3 (forcefield.transform.position.x, forcefield.transform.position.y, forcefield.transform.position.z), Quaternion.identity);
+			asteroid.transform.parent = forcefield.transform;
+			Rigidbody rb = asteroid.GetComponent<Rigidbody> ();
+			rb.angularVelocity =  new Vector3 (0f, 0f, Random.Range(minspin,maxspin));
 		}
+	}
 
-
-		//print (forcefields[0].transform.position.y);
-
-	}*/
 
 	private GameObject[] AddItemToArray (GameObject[] original, GameObject itemToAdd) {
 		GameObject[] finalArray = new GameObject[ original.Length + 1 ];
