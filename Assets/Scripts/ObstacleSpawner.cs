@@ -9,10 +9,12 @@ public class ObstacleSpawner : MonoBehaviour {
 	private float screenHeight;
 	Vector3 downmost;
 	Vector3 upmost; 
+	Vector3 leftmost;
+	Vector3 rightmost;
 	float distance;
 	public int maxObstacles=5;
 	public int minObstacles=3;
-	public float defaultxSpawn = 12f;
+	public float defaultxSpawn;
 	public float speed = 5f;
 	//TODO make speed vary with time
 	public Sprite targetSprite;
@@ -28,8 +30,13 @@ public class ObstacleSpawner : MonoBehaviour {
 		upmost = Camera.main.ViewportToWorldPoint(new Vector3(0,1,distance));
 		//get down limit
 		downmost = Camera.main.ViewportToWorldPoint(new Vector3(0,0,distance));
+
+		leftmost = Camera.main.ViewportToWorldPoint(new Vector3(0,0,distance));
+		//get down limit
+		rightmost = Camera.main.ViewportToWorldPoint(new Vector3(1,0,distance));
 		screenHeight = upmost.y - downmost.y;
 
+		defaultxSpawn = rightmost.x + 0.5f;
 
 
 	}
@@ -92,7 +99,7 @@ public class ObstacleSpawner : MonoBehaviour {
 			var asteroid = Instantiate (Asteroid, new Vector3 (forcefield.transform.position.x, forcefield.transform.position.y, forcefield.transform.position.z), Quaternion.identity);
 			asteroid.transform.parent = forcefield.transform;
 			Rigidbody rb = asteroid.GetComponent<Rigidbody> ();
-			rb.angularVelocity =  new Vector3 (0f, 0f, Random.Range(minspin,maxspin));
+			rb.angularVelocity =  new Vector3 (Random.Range(minspin,maxspin),Random.Range(minspin,maxspin), Random.Range(minspin,maxspin));
 		}
 	}
 
