@@ -12,6 +12,7 @@ public class forceField : MonoBehaviour {
 	public int enemyScore = 150;
 	public AudioClip fireSound;
 	public AudioClip destroyedSound;
+	public float pushDistance = 0.2f;
 
 	private ScoreKeeper scoreKeeper;
 
@@ -25,7 +26,7 @@ public class forceField : MonoBehaviour {
 	}
 
 
-	void OnCollisionEnter2D(Collision2D collider){
+	void OnTriggerEnter2D(Collider2D collider){
 
 		//ensure collisions with player laser only are registered
 		Projectile missile = collider.gameObject.GetComponent<Projectile> ();
@@ -33,6 +34,7 @@ public class forceField : MonoBehaviour {
 			missile.Hit();
 
 			float currenty = gameObject.transform.position.y;
+			transform.position += Vector3.right * pushDistance;
 
 			if (gameObject.tag == "target") {
 				gameObject.transform.localScale -= new Vector3 (changeSize,changeSize,changeSize);
@@ -58,7 +60,7 @@ public class forceField : MonoBehaviour {
 				GameObject target = GameObject.FindGameObjectWithTag ("target");
 				target.transform.localScale -= new Vector3 (changeSize,changeSize,changeSize);
 				CircleCollider2D col2 = target.GetComponent<CircleCollider2D>();
-				col2.transform.localScale -= new Vector3 (rescaleSize, rescaleSize, rescaleSize);
+				col2.transform.localScale -= new Vector3 (changeSize,changeSize,changeSize);
 
 			}
 		}

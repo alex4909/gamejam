@@ -39,7 +39,7 @@ public class ObstacleSpawner : MonoBehaviour {
 			SpawnFixedObstacles (numberOfObstacles, screenHeight, defaultx, downmost.y, upmost.y);
 			SpawnObstacles (numberOfObstacles, screenHeight, defaultx, downmost.y, upmost.y);
 			AssignTarget ();
-			AddJoints ();
+			//AddJoints ();
 		}
 	}
 
@@ -77,7 +77,7 @@ public class ObstacleSpawner : MonoBehaviour {
 		sr.sprite = targetSprite;
 	}
 
-	void AddJoints(){
+	/*void AddJoints(){
 		
 		GameObject[] forcefields = GameObject.FindGameObjectsWithTag ("forcefield");
 		GameObject target = GameObject.FindGameObjectWithTag ("target");
@@ -92,7 +92,7 @@ public class ObstacleSpawner : MonoBehaviour {
 
 				Rigidbody2D connectedRB = forcefields [i + 1].gameObject.GetComponent<Rigidbody2D> ();
 				sjt.connectedBody = connectedRB;
-				sjt.frequency = 10000f;
+				sjt.frequency = 0f;
 				sjt.dampingRatio = 0.1f;
 			
 
@@ -102,7 +102,7 @@ public class ObstacleSpawner : MonoBehaviour {
 
 		//print (forcefields[0].transform.position.y);
 
-	}
+	}*/
 
 	private GameObject[] AddItemToArray (GameObject[] original, GameObject itemToAdd) {
 		GameObject[] finalArray = new GameObject[ original.Length + 1 ];
