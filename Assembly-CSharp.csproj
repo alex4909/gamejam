@@ -51,10 +51,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scripts\EnemyBehaviour.cs" />
-     <Compile Include="Assets\Scripts\EnemyProjectile.cs" />
-     <Compile Include="Assets\Scripts\EnemySpawner.cs" />
      <Compile Include="Assets\Scripts\forceField.cs" />
+     <Compile Include="Assets\Scripts\laserShredder.cs" />
      <Compile Include="Assets\Scripts\LevelManager.cs" />
      <Compile Include="Assets\Scripts\MusicPlayer.cs" />
      <Compile Include="Assets\Scripts\obstacleManager.cs" />
@@ -65,8 +63,6 @@
      <Compile Include="Assets\Scripts\ScoreDisplay.cs" />
      <Compile Include="Assets\Scripts\ScoreKeeper.cs" />
      <Compile Include="Assets\Scripts\Shredder.cs" />
-     <Compile Include="Assets\Scripts\UFOBehaviour.cs" />
-     <Compile Include="Assets\Scripts\UFOSpawner.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

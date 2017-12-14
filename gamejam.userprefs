@@ -2,14 +2,13 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\PlayerController.cs">
     <Files>
-      <File FileName="Assets\Scripts\ObstacleSpawner.cs" Line="17" Column="29" />
+      <File FileName="Assets\Scripts\ObstacleSpawner.cs" Line="25" Column="72" />
       <File FileName="Assets\Scripts\obstacleManager.cs" Line="20" Column="32" />
-      <File FileName="Assets\Scripts\forceField.cs" Line="41" Column="55" />
+      <File FileName="Assets\Scripts\forceField.cs" Line="52" Column="61" />
       <File FileName="Assets\Scripts\ScoreDisplay.cs" Line="15" Column="36" />
-      <File FileName="Assets\Scripts\PlayerController.cs" Line="37" Column="19" />
+      <File FileName="Assets\Scripts\PlayerController.cs" Line="64" Column="36" />
       <File FileName="Assets\Scripts\laserShredder.cs" Line="15" Column="1" />
-      <File FileName="Assets\Scripts\Shredder.cs" Line="7" Column="1" />
-      <File FileName="Assets\Scripts\EnemyBehaviour.cs" Line="21" Column="3" />
+      <File FileName="Assets\Scripts\Shredder.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

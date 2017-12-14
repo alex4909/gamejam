@@ -14,7 +14,7 @@ public class forceField : MonoBehaviour {
 	public int enemyScore = 150;
 	public AudioClip fireSound;
 	public AudioClip destroyedSound;
-	public float pushDistance = 0.8f;
+	private float pushDistance = 0.4f;
 
 	private ScoreKeeper scoreKeeper;
 
@@ -44,8 +44,12 @@ public class forceField : MonoBehaviour {
 
 				//resize everything
 				gameObject.transform.localScale -= new Vector3 (changeSize,changeSize,changeSize);
+				float size = Mathf.Clamp (gameObject.transform.localScale.x, 0.1f, 5f);
+				gameObject.transform.localScale = new Vector3 (size, size, size);
+
 				CircleCollider2D col = gameObject.GetComponent<CircleCollider2D> ();
-				col.transform.localScale -= new Vector3 (changeSize,changeSize,changeSize);
+				//col.transform.localScale -= new Vector3 (changeSize,changeSize,changeSize);
+				col.transform.localScale=new Vector3 (size, size, size);
 
 				GameObject[] forceFields = GameObject.FindGameObjectsWithTag ("forcefield");
 				foreach (GameObject forceField in forceFields) {
@@ -72,9 +76,11 @@ public class forceField : MonoBehaviour {
 				float rescaleSize = changeSize / forceFields.Length;
 				GameObject target = GameObject.FindGameObjectWithTag ("target");
 				target.transform.localScale -= new Vector3 (changeSize,changeSize,changeSize);
+				float size = Mathf.Clamp (target.transform.localScale.x, 0.1f, 5f);
+				target.transform.localScale = new Vector3 (size, size, size);
 				CircleCollider2D col2 = target.GetComponent<CircleCollider2D>();
-				col2.transform.localScale -= new Vector3 (changeSize,changeSize,changeSize);
-
+				//col2.transform.localScale -= new Vector3 (changeSize,changeSize,changeSize);
+				col2.transform.localScale=new Vector3 (size, size, size);
 
 			}
 		}

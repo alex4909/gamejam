@@ -10,10 +10,11 @@ public class ObstacleSpawner : MonoBehaviour {
 	Vector3 downmost;
 	Vector3 upmost; 
 	float distance;
-	public int maxObstacles=6;
+	public int maxObstacles=5;
 	public int minObstacles=3;
 	public float defaultxSpawn = 12f;
 	public float speed = 5f;
+	//TODO make speed vary with time
 	public Sprite targetSprite;
 
 	// Use this for initialization
@@ -39,7 +40,7 @@ public class ObstacleSpawner : MonoBehaviour {
 			SpawnFixedObstacles (numberOfObstacles, screenHeight, defaultxSpawn, downmost.y, upmost.y);
 			SpawnObstacles (numberOfObstacles, screenHeight, defaultxSpawn, downmost.y, upmost.y);
 			AssignTarget ();
-			//AddJoints ();
+			speed += 0.2f;
 		}
 	}
 

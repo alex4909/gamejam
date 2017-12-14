@@ -55,12 +55,13 @@ public class PlayerController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		MoveWithKeys ();
+	
+		MoveWithMouse();
 
-		if (Input.GetKeyDown (KeyCode.Space)) {
+		if (Input.GetMouseButtonDown (0)) {
 			InvokeRepeating("FireLaser",0.0001f,fireRate) ;
 		}
-		if (Input.GetKeyUp (KeyCode.Space)) {
+		if (Input.GetMouseButtonUp (0)) {
 			CancelInvoke ("FireLaser");
 		}
 
@@ -82,35 +83,18 @@ public class PlayerController : MonoBehaviour {
 
 
 	//move function
-	void MoveWithKeys(){
+	void MoveWithMouse(){
 
+		Vector3 mouseCoordinates = new Vector3 (-Input.GetAxis ("Mouse Y"), Input.GetAxis ("Mouse X"), 0);
 
+		mouseCoordinates *= 20 * Time.deltaTime;
+		transform.Translate (mouseCoordinates);
 
-		if (Input.GetKey (KeyCode.UpArrow)) {
-
-			//update position - note time.deltatime makes it framerate independant
-			transform.position +=  Vector3.up*speed*Time.deltaTime;
-		}
-
-		else if (Input.GetKey (KeyCode.DownArrow)) {
-			transform.position -= Vector3.up*speed*Time.deltaTime;
-		}
-
-		else if (Input.GetKey (KeyCode.LeftArrow)) {
-			transform.position -= Vector3.right*speed*Time.deltaTime;
-		}
-
-		else if (Input.GetKey (KeyCode.RightArrow)) {
-			transform.position += Vector3.right*speed*Time.deltaTime;
-		}
-			
 		//restrict player to gamespace
 		float newx =Mathf.Clamp (transform.position.x, xmin, xmax);
 		float newY = Mathf.Clamp (transform.position.y, ymin, ymax);
 		transform.position = new Vector3 (newx, newY, transform.position.z);
 	}
-
-
  // fire function
 
 	void FireLaser(){
