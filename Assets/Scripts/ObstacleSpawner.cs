@@ -6,27 +6,37 @@ public class ObstacleSpawner : MonoBehaviour {
 
 	public GameObject forceField;
 	private float screenHeight;
-	public float defaultx = 6f;
+	Vector3 downmost;
+	Vector3 upmost; 
+	float distance;
+	public float defaultx = 12f;
 	public float speed = 5f;
+	public Sprite targetSprite;
 
 	// Use this for initialization
 	void Start () {
 		//get z distance from camera to player
-		float distance = transform.position.z - Camera.main.transform.position.z;
+		distance = transform.position.z - Camera.main.transform.position.z;
 		//get up limit by calculating in worldpoints from camera view
-		Vector3 upmost = Camera.main.ViewportToWorldPoint(new Vector3(0,1,distance));
+		upmost = Camera.main.ViewportToWorldPoint(new Vector3(0,1,distance));
 		//get down limit
-		Vector3 downmost = Camera.main.ViewportToWorldPoint(new Vector3(0,0,distance));
+		downmost = Camera.main.ViewportToWorldPoint(new Vector3(0,0,distance));
 		screenHeight = upmost.y - downmost.y;
 
-		SpawnFixedObstacles (5f, screenHeight, defaultx, downmost.y, upmost.y);
-		SpawnObstacles (5f, screenHeight, defaultx, downmost.y, upmost.y);
+
 
 	}
 
 	// Update is called once per frame
 	void Update () {
-		
+
+		GameObject[] currentForcefields= GameObject.FindGameObjectsWithTag ("forcefield");
+		if (currentForcefields.Length == 0) {
+			
+			SpawnFixedObstacles (5f, screenHeight, defaultx, downmost.y, upmost.y);
+			SpawnObstacles (5f, screenHeight, defaultx, downmost.y, upmost.y);
+			AssignTarget ();
+		}
 	}
 
 //spawns the top and bottom obstacles
@@ -52,5 +62,14 @@ public class ObstacleSpawner : MonoBehaviour {
 			field.transform.localScale = new Vector3 (diameter, diameter, diameter);
 			field.GetComponent<Rigidbody2D>().velocity = new Vector3 (-speed, 0, 0);
 		}
+	}
+
+	//randomly assign one forcefield as the target
+	void AssignTarget(){
+		GameObject[] forcefields = GameObject.FindGameObjectsWithTag ("forcefield");
+		int targetIndex = Random.Range (0, forcefields.Length - 1);
+		forcefields [targetIndex].tag = "target";
+		SpriteRenderer sr = forcefields [targetIndex].GetComponent<SpriteRenderer> ();
+		sr.sprite = targetSprite;
 	}
 }

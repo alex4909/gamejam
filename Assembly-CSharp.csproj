@@ -6,7 +6,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{331EB9F2-4051-110F-B4F4-C24814C93E04}</ProjectGuid>
+    <ProjectGuid>{4D3F472B-D8ED-A485-D056-910883A3FBD8}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -61,6 +61,7 @@
      <Compile Include="Assets\Scripts\UFOBehaviour.cs" />
      <Compile Include="Assets\Scripts\UFOSpawner.cs" />
      <Compile Include="Assets\Scripts\forceField.cs" />
+     <Compile Include="Assets\Scripts\obstacleManager.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

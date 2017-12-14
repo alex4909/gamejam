@@ -8,6 +8,7 @@ public class forceField : MonoBehaviour {
 	public GameObject projectile;
 	public float enemyProjectileSpeed = 10f;
 	public float laserRate = 0.0005f;
+	public float changeSize = 0.1f;
 	public int enemyScore = 150;
 	public AudioClip fireSound;
 	public AudioClip destroyedSound;
@@ -30,6 +31,23 @@ public class forceField : MonoBehaviour {
 		Projectile missile = collider.gameObject.GetComponent<Projectile> ();
 		if (missile) {
 			missile.Hit();
+
+			float currenty = gameObject.transform.position.y;
+
+			if (gameObject.tag == "target") {
+				gameObject.transform.localScale -= new Vector3 (changeSize,changeSize,changeSize);
+				GameObject[] forceFields = GameObject.FindGameObjectsWithTag ("forcefield");
+				foreach (GameObject forceField in forceFields) {
+					float rescaleSize = changeSize / forceFields.Length;
+					forceField.transform.localScale += new Vector3 (rescaleSize, rescaleSize, rescaleSize);
+					//TODO reposition here
+				}
+
+			} else if (gameObject.tag == "forcefield") {
+				gameObject.transform.localScale += new Vector3 (changeSize,changeSize,changeSize);
+				GameObject target = GameObject.FindGameObjectWithTag ("target");
+				target.transform.localScale -= new Vector3 (changeSize,changeSize,changeSize);
+			}
 		}
 
 		/*

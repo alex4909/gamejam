@@ -42,8 +42,8 @@ MonoBehaviour:
     y: 30
     width: 1366
     height: 635
-  m_MinSize: {x: 683, y: 492}
-  m_MaxSize: {x: 14004, y: 14042}
+  m_MinSize: {x: 679, y: 492}
+  m_MaxSize: {x: 14002, y: 14042}
   vertical: 0
   controlID: 10
 --- !u!114 &3
@@ -64,8 +64,8 @@ MonoBehaviour:
     y: 0
     width: 371
     height: 635
-  m_MinSize: {x: 277, y: 71}
-  m_MaxSize: {x: 4002, y: 4021}
+  m_MinSize: {x: 275, y: 50}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 16}
   m_Panes:
   - {fileID: 16}
@@ -90,8 +90,8 @@ MonoBehaviour:
     y: 0
     width: 300
     height: 364
-  m_MinSize: {x: 202, y: 221}
-  m_MaxSize: {x: 4002, y: 4021}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 17}
   m_Panes:
   - {fileID: 17}
@@ -208,7 +208,7 @@ MonoBehaviour:
     y: 0
     width: 995
     height: 635
-  m_MinSize: {x: 406, y: 492}
+  m_MinSize: {x: 404, y: 492}
   m_MaxSize: {x: 10002, y: 14042}
   vertical: 1
   controlID: 11
@@ -232,8 +232,8 @@ MonoBehaviour:
     y: 0
     width: 995
     height: 364
-  m_MinSize: {x: 406, y: 221}
-  m_MaxSize: {x: 8006, y: 4021}
+  m_MinSize: {x: 404, y: 221}
+  m_MaxSize: {x: 8004, y: 4021}
   vertical: 0
   controlID: 12
 --- !u!114 &11
@@ -401,13 +401,13 @@ MonoBehaviour:
   m_LastFolders:
   - Assets/Prefabs
   m_LastFoldersGridSize: 96
-  m_LastProjectPath: C:\Users\Alex\Documents\unity\2017_spacegame
+  m_LastProjectPath: C:\Users\Alex\Documents\unity\2017-gamejam
   m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 7c270000
-    m_LastClickedID: 10108
-    m_ExpandedIDs: 00000000dc240000ffffff7f
+    m_SelectedIDs: 70250000
+    m_LastClickedID: 9584
+    m_ExpandedIDs: 00000000d4240000ffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -435,7 +435,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000dc240000
+    m_ExpandedIDs: 00000000d4240000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -516,7 +516,7 @@ MonoBehaviour:
     y: 92
     width: 369
     height: 614
-  m_ScrollPosition: {x: 0, y: 0}
+  m_ScrollPosition: {x: 0, y: 473.95508}
   m_InspectorMode: 0
   m_PreviewResizer:
     m_CachedPref: 160
@@ -551,23 +551,23 @@ MonoBehaviour:
     height: 343
   m_TreeViewState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 
+    m_SelectedIDs: 06250000
     m_LastClickedID: 0
-    m_ExpandedIDs: bef4ffffd8f4ffffd6fbffff00000000
+    m_ExpandedIDs: dafbffff00000000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: ForceField(Clone)
-      m_OriginalName: ForceField(Clone)
+      m_Name: 
+      m_OriginalName: 
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: -386794
+      m_UserData: 0
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
-      m_OriginalEventType: 0
+      m_OriginalEventType: 11
       m_IsRenamingFilename: 0
       m_ClientGUIView: {fileID: 4}
     m_SearchString: 
@@ -627,11 +627,11 @@ MonoBehaviour:
     yGrid:
       m_Target: 0
       speed: 2
-      m_Value: 0.041209877
+      m_Value: 0
     zGrid:
       m_Target: 1
       speed: 2
-      m_Value: 0.95878935
+      m_Value: 1
   m_Rotation:
     m_Target: {x: 0, y: 0, z: 0, w: 1}
     speed: 2
@@ -644,7 +644,7 @@ MonoBehaviour:
     m_Target: 1
     speed: 2
     m_Value: 1
-  m_LastSceneViewRotation: {x: 0.14559934, y: -0.7252397, z: 0.16165216, w: 0.6532203}
+  m_LastSceneViewRotation: {x: -0.08717229, y: 0.89959055, z: -0.21045254, w: -0.3726226}
   m_LastSceneViewOrtho: 0
   m_ReplacementShader: {fileID: 0}
   m_ReplacementString: 
