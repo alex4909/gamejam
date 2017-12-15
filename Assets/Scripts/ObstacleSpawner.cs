@@ -22,6 +22,8 @@ public class ObstacleSpawner : MonoBehaviour {
 	public float minspin=0.5f;
 	public float maxspin=2f;
 
+	//TODO color - assigna public color to the target and call this from the player controller using findobjectwithtag
+
 	// Use this for initialization
 	void Start () {
 		//get z distance from camera to player

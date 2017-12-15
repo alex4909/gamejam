@@ -14,6 +14,7 @@ public class forceField : MonoBehaviour {
 	public int enemyScore = 150;
 	public AudioClip fireSound;
 	public AudioClip destroyedSound;
+	public ParticleSystem destroyedPaticleSystem;
 	private float pushDistance = 0.4f;
 
 	private ScoreKeeper scoreKeeper;
@@ -60,7 +61,10 @@ public class forceField : MonoBehaviour {
 
 					//destroy if out of health
 					if (health <= 0) {
+						ParticleSystem destroyParticles = Instantiate (destroyedPaticleSystem, gameObject.transform.position, Quaternion.identity);
+						destroyParticles.GetComponent<Rigidbody2D> ().velocity = gameObject.GetComponent<Rigidbody2D> ().velocity;
 						Destroy (gameObject);
+
 					}
 
 				}
@@ -86,8 +90,12 @@ public class forceField : MonoBehaviour {
 		}
 
 
+
 	}
 
+	void KillObstacle(GameObject obj){
+		Destroy(obj);
+	}
 
 
 
