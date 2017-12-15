@@ -45,15 +45,14 @@ public class PlayerController : MonoBehaviour {
 		xmin = leftmost.x;
 
 
-		//spawn thruster particle stream
-		//GameObject thruster=Instantiate(thrusterPrefab,this.transform.position,Quaternion.identity) as GameObject;
-		//thruster.transform.parent = this.transform;
+		UpdateColor ();
 	
 	
 	}
 	
 	// Update is called once per frame
 	void Update () {
+
 
 	
 		MoveWithMouse();
@@ -64,6 +63,7 @@ public class PlayerController : MonoBehaviour {
 		if (Input.GetMouseButtonUp (0)) {
 			CancelInvoke ("FireLaser");
 		}
+
 
 
 	}
@@ -85,7 +85,7 @@ public class PlayerController : MonoBehaviour {
 	//move function
 	void MoveWithMouse(){
 
-		Vector3 mouseCoordinates = new Vector3 (-Input.GetAxis ("Mouse Y"), Input.GetAxis ("Mouse X"), 0);
+		Vector3 mouseCoordinates = new Vector3 (Input.GetAxis ("Mouse X"), Input.GetAxis ("Mouse Y"), 0);
 
 		mouseCoordinates *= 20 * Time.deltaTime;
 		transform.Translate (mouseCoordinates);
@@ -102,5 +102,15 @@ public class PlayerController : MonoBehaviour {
 			beam.GetComponent<Rigidbody2D>().velocity = new Vector3 (projectileSpeed, 0, 0);
 			AudioSource.PlayClipAtPoint (fireSound,transform.position);
 	}
+
+	void UpdateColor(){
+		
+		//update color of spaceship
+		GameObject target = GameObject.FindGameObjectWithTag("target");
+		Color color = target.GetComponent<SpriteRenderer>().color;
+		SpriteRenderer overlaySR = GetComponentInChildren<SpriteRenderer>();
+		overlaySR.color = color;
+	}
+
 
 }

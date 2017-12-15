@@ -21,6 +21,13 @@ public class ObstacleSpawner : MonoBehaviour {
 	public GameObject Asteroid;
 	public float minspin=0.5f;
 	public float maxspin=2f;
+	private Color[] colors = {
+		new Color (0f, 0.839f, 0f, 1f),
+		new Color (0.992f, 0.729f, 0.196f, 1),
+		new Color (0.937f, 0.467f, 0.871f, 1),
+		new Color (0.031f, 0.855f,0.957f , 1)
+	};
+	//public Material[] asteroidMaterials;
 
 	//TODO color - assigna public color to the target and call this from the player controller using findobjectwithtag
 
@@ -121,6 +128,41 @@ public class ObstacleSpawner : MonoBehaviour {
 	void ColorObstacles(){
 		//find target and assign color randomly
 		//then find other targets and assign remaining colors
+
+		//get target color
+		int targetColorIndex = Random.Range(0,colors.Length);
+
+		GameObject target = GameObject.FindGameObjectWithTag ("target");
+		SpriteRenderer targetSR = target.GetComponent<SpriteRenderer> ();
+			targetSR.color = colors [targetColorIndex];
+		BroadcastMessage ("UpdateColor");
+
+		//color the asteroid
+		MeshRenderer targetAsteroidMR = target.GetComponentInChildren<MeshRenderer>();
+		targetAsteroidMR.material.color=colors [targetColorIndex];
+
+
+		//assign colors to other obstacles
+		List<Color> nonTargetColors = colors.ToList();
+		nonTargetColors.Remove (colors [targetColorIndex]);
+
+		GameObject[] obstacles = GameObject.FindGameObjectsWithTag("forcefield");
+
+		foreach(GameObject obstacle in obstacles){
+			SpriteRenderer obstacleSR = obstacle.GetComponent<SpriteRenderer> ();
+			obstacleSR.color = nonTargetColors[Random.Range(0,nonTargetColors.Count)];
+
+			//color the asteroid
+			MeshRenderer obstacleAsteroidMR = obstacle.GetComponentInChildren<MeshRenderer>();
+			obstacleAsteroidMR.material.color=obstacleSR.color;
+
+		}
+
+
+
+
 	}
+
+
 
 }
