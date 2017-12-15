@@ -16,12 +16,14 @@ public class forceField : MonoBehaviour {
 	public AudioClip destroyedSound;
 	public ParticleSystem destroyedPaticleSystem;
 	private float pushDistance = 0.4f;
+	private float startHealth;
 
 	private ScoreKeeper scoreKeeper;
 
 
 	void Start(){
 		health = Random.Range (minhealth, maxhealth);
+		startHealth = health;
 	}
 
 	void Update(){
@@ -49,7 +51,7 @@ public class forceField : MonoBehaviour {
 				gameObject.transform.localScale = new Vector3 (size, size, size);
 
 				CircleCollider2D col = gameObject.GetComponent<CircleCollider2D> ();
-				//col.transform.localScale -= new Vector3 (changeSize,changeSize,changeSize);
+
 				col.transform.localScale=new Vector3 (size, size, size);
 
 				GameObject[] forceFields = GameObject.FindGameObjectsWithTag ("forcefield");
@@ -59,6 +61,13 @@ public class forceField : MonoBehaviour {
 					CircleCollider2D col1 = forceField.GetComponent<CircleCollider2D>();
 					col1.transform.localScale += new Vector3 (rescaleSize, rescaleSize, rescaleSize);
 
+
+				//reduce alpha
+					Color fieldColor = gameObject.GetComponent<SpriteRenderer>().color;
+					fieldColor.a = fieldColor.a * (health / startHealth);
+					gameObject.GetComponent<SpriteRenderer> ().color = fieldColor;
+
+
 					//destroy if out of health
 					if (health <= 0) {
 						ParticleSystem destroyParticles = Instantiate (destroyedPaticleSystem, gameObject.transform.position, Quaternion.identity);
@@ -66,7 +75,10 @@ public class forceField : MonoBehaviour {
 
 						//color appropriately
 						var particleMain = destroyParticles.main;
-						particleMain.startColor = gameObject.GetComponent<SpriteRenderer>().color;
+
+						Color particleColor = gameObject.GetComponent<SpriteRenderer>().color;
+						particleColor.a = 0.8f;
+						particleMain.startColor = particleColor;
 						Destroy (gameObject);
 
 					}

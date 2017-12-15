@@ -201,9 +201,8 @@ public class ObstacleSpawner : MonoBehaviour {
 		newRock.GetComponent<Rigidbody> ().angularVelocity = new Vector3 (Random.Range (minspin, maxspin), Random.Range (minspin, maxspin), Random.Range (minspin, maxspin));
 		float rockSize = Random.Range (minRocksize, maxRocksize);
 		newRock.transform.localScale = new Vector3 (rockSize, rockSize, rockSize);
-		Material rockMaterial = newRock.GetComponent<Material> ();
+		Material rockMaterial = newRock.GetComponent<Renderer> ().material;
 		rockMaterial = rockMaterials [Random.Range (0, rockMaterials.Length - 1)];
-
 
 		}
 

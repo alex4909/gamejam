@@ -58,10 +58,10 @@ public class PlayerController : MonoBehaviour {
 	
 		MoveWithMouse();
 
-		if (Input.GetMouseButtonDown (0)) {
+		if (Input.GetMouseButtonUp (0)) {
 			InvokeRepeating("FireLaser",0.0001f,fireRate) ;
 		}
-		if (Input.GetMouseButtonUp (0)) {
+		if (Input.GetMouseButtonDown (0)) {
 			CancelInvoke ("FireLaser");
 		}
 
@@ -99,7 +99,7 @@ public class PlayerController : MonoBehaviour {
  // fire function
 
 	void FireLaser(){
-		GameObject beam = Instantiate(projectile, transform.position,Quaternion.Euler(0,0,90)) as GameObject;
+		GameObject beam = Instantiate(projectile, new Vector3(transform.position.x,transform.position.y,1),Quaternion.Euler(0,0,90)) as GameObject;
 			beam.GetComponent<Rigidbody2D>().velocity = new Vector3 (projectileSpeed, 0, 0);
 			AudioSource.PlayClipAtPoint (fireSound,transform.position);
 			
