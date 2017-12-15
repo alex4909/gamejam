@@ -53,6 +53,7 @@ public class ObstacleSpawner : MonoBehaviour {
 			SpawnObstacles (numberOfObstacles, screenHeight, defaultxSpawn, downmost.y, upmost.y);
 			AssignTarget ();
 			SpawnAsteroids ();
+			ColorObstacles ();
 			speed += 0.2f;
 		}
 	}
@@ -116,5 +117,10 @@ public class ObstacleSpawner : MonoBehaviour {
 	}
 
 
+
+	void ColorObstacles(){
+		//find target and assign color randomly
+		//then find other targets and assign remaining colors
+	}
 
 }
