@@ -31,3 +31,5 @@ C:\Users\Alex\Documents\unity\gamejam\Temp\bin\Debug\UnityEngine.HoloLens.xml
 C:\Users\Alex\Documents\unity\gamejam\Temp\bin\Debug\UnityEngine.VR.xml
 C:\Users\Alex\Documents\unity\gamejam\obj\Debug\Assembly-CSharp.dll
 C:\Users\Alex\Documents\unity\gamejam\obj\Debug\Assembly-CSharp.pdb
+C:\Users\alex.hall\Documents\gamejam\obj\Debug\Assembly-CSharp.csprojResolveAssemblyReference.cache
+C:\Users\alex.hall\Documents\gamejam\obj\Debug\Assembly-CSharp.dll

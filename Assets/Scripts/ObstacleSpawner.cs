@@ -15,7 +15,8 @@ public class ObstacleSpawner : MonoBehaviour {
 	public int maxObstacles=5;
 	public int minObstacles=3;
 	public float defaultxSpawn;
-	public float speed = 5f;
+	public float startSpeed=4f;
+	public float speed = 4f;
 	//TODO make speed vary with time
 	public Sprite targetSprite;
 	public GameObject Asteroid;
@@ -27,6 +28,18 @@ public class ObstacleSpawner : MonoBehaviour {
 		new Color (0.937f, 0.467f, 0.871f, 1),
 		new Color (0.031f, 0.855f,0.957f , 1)
 	};
+	public Material[] rockMaterials;
+	public GameObject[] rock;
+	public float minRockSpawnTime = 2f;
+	public float maxRockSpawnTime=6f;
+	public float minRockxSpeed=2f;
+	public float maxRockxSpeed=4f;
+	public float minRockySpeed=0f;
+	public float maxRockySpeed=1f;
+	public float minRocksize=0f;
+	public float maxRocksize=1f;
+	private float time;
+	private float rockSpawnTime;
 
 	//public Material[] asteroidMaterials;
 
@@ -47,7 +60,8 @@ public class ObstacleSpawner : MonoBehaviour {
 		screenHeight = upmost.y - downmost.y;
 
 		defaultxSpawn = rightmost.x + 0.5f;
-
+		time = 0f;
+		rockSpawnTime = Random.Range (minRockSpawnTime, maxRockSpawnTime);
 
 	}
 
@@ -62,8 +76,17 @@ public class ObstacleSpawner : MonoBehaviour {
 			AssignTarget ();
 			SpawnAsteroids ();
 			ColorObstacles ();
-			speed += 0.2f;
+			speed +=0.2f;
+			speed = Mathf.Clamp (speed, startSpeed, 15f);
 		}
+
+
+		if (time > rockSpawnTime) {
+			SpawnRock (defaultxSpawn);
+			print ("spawned rock");
+			time = 0f;
+		}
+		time += Time.deltaTime;
 	}
 
 //spawns the top and bottom obstacles
@@ -161,9 +184,28 @@ public class ObstacleSpawner : MonoBehaviour {
 
 		PlayerController player = FindObjectOfType<PlayerController> ();
 		player.SendMessage ("UpdateColor",colors [targetColorIndex]);
+		/*Projectile[] projectiles = FindObjectsOfType<Projectile> ();
+		foreach (Projectile projectile in projectiles) {
+			projectile.SendMessage ("UpdateColor",colors [targetColorIndex]);
+		}*/
 
 
 	}
+
+	void SpawnRock(float xpos){
+
+
+		var newRock = Instantiate (rock[Random.Range(0,rock.Length-1)], new Vector3 (xpos, Random.Range(downmost.y,upmost.y), 2f), Quaternion.identity);
+		float rockXVelocity = Random.Range (-minRockxSpeed, -maxRockxSpeed);
+		newRock.GetComponent<Rigidbody> ().velocity = new Vector3 (rockXVelocity, Random.Range(minRockySpeed,maxRockySpeed), 0f);
+		newRock.GetComponent<Rigidbody> ().angularVelocity = new Vector3 (Random.Range (minspin, maxspin), Random.Range (minspin, maxspin), Random.Range (minspin, maxspin));
+		float rockSize = Random.Range (minRocksize, maxRocksize);
+		newRock.transform.localScale = new Vector3 (rockSize, rockSize, rockSize);
+		Material rockMaterial = newRock.GetComponent<Material> ();
+		rockMaterial = rockMaterials [Random.Range (0, rockMaterials.Length - 1)];
+
+
+		}
 
 
 

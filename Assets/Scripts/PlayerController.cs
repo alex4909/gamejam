@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour {
 	public float health = 500;
 	public AudioClip fireSound;
 	public AudioClip loseSound;
+	private Color currentColor;
 
 	public GameObject projectile;
 	public GameObject thrusterPrefab;
@@ -101,6 +102,9 @@ public class PlayerController : MonoBehaviour {
 		GameObject beam = Instantiate(projectile, transform.position,Quaternion.Euler(0,0,90)) as GameObject;
 			beam.GetComponent<Rigidbody2D>().velocity = new Vector3 (projectileSpeed, 0, 0);
 			AudioSource.PlayClipAtPoint (fireSound,transform.position);
+			
+		SpriteRenderer beamSR = beam.GetComponent<SpriteRenderer> ();
+		beamSR.color = currentColor;
 	}
 
 	void UpdateColor(Color col){
@@ -108,6 +112,7 @@ public class PlayerController : MonoBehaviour {
 		//update color of spaceship
 		SpriteRenderer overlaySR = GetComponentInChildren<SpriteRenderer>();
 		overlaySR.color = col;
+		currentColor = col;
 
 	}
 

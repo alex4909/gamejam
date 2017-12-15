@@ -14,4 +14,13 @@ public class Projectile : MonoBehaviour {
 		return damage;
 	}
 
+
+	void UpdateColor(Color col){
+
+		//update color of laser
+		SpriteRenderer overlaySR = GetComponent<SpriteRenderer>();
+		overlaySR.color = col;
+
+	}
+
 }
