@@ -45,7 +45,7 @@ public class PlayerController : MonoBehaviour {
 		xmin = leftmost.x;
 
 
-		UpdateColor ();
+		//UpdateColor ();
 	
 	
 	}
@@ -103,13 +103,12 @@ public class PlayerController : MonoBehaviour {
 			AudioSource.PlayClipAtPoint (fireSound,transform.position);
 	}
 
-	void UpdateColor(){
+	void UpdateColor(Color col){
 		
 		//update color of spaceship
-		GameObject target = GameObject.FindGameObjectWithTag("target");
-		Color color = target.GetComponent<SpriteRenderer>().color;
 		SpriteRenderer overlaySR = GetComponentInChildren<SpriteRenderer>();
-		overlaySR.color = color;
+		overlaySR.color = col;
+
 	}
 
 

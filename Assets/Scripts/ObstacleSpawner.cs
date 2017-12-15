@@ -27,6 +27,7 @@ public class ObstacleSpawner : MonoBehaviour {
 		new Color (0.937f, 0.467f, 0.871f, 1),
 		new Color (0.031f, 0.855f,0.957f , 1)
 	};
+
 	//public Material[] asteroidMaterials;
 
 	//TODO color - assigna public color to the target and call this from the player controller using findobjectwithtag
@@ -135,7 +136,7 @@ public class ObstacleSpawner : MonoBehaviour {
 		GameObject target = GameObject.FindGameObjectWithTag ("target");
 		SpriteRenderer targetSR = target.GetComponent<SpriteRenderer> ();
 			targetSR.color = colors [targetColorIndex];
-		BroadcastMessage ("UpdateColor");
+
 
 		//color the asteroid
 		MeshRenderer targetAsteroidMR = target.GetComponentInChildren<MeshRenderer>();
@@ -158,7 +159,8 @@ public class ObstacleSpawner : MonoBehaviour {
 
 		}
 
-
+		PlayerController player = FindObjectOfType<PlayerController> ();
+		player.SendMessage ("UpdateColor",colors [targetColorIndex]);
 
 
 	}

@@ -63,6 +63,10 @@ public class forceField : MonoBehaviour {
 					if (health <= 0) {
 						ParticleSystem destroyParticles = Instantiate (destroyedPaticleSystem, gameObject.transform.position, Quaternion.identity);
 						destroyParticles.GetComponent<Rigidbody2D> ().velocity = gameObject.GetComponent<Rigidbody2D> ().velocity;
+
+						//color appropriately
+						var particleMain = destroyParticles.main;
+						particleMain.startColor = gameObject.GetComponent<SpriteRenderer>().color;
 						Destroy (gameObject);
 
 					}
